@@ -19,26 +19,38 @@ abstract public class AbstractRepository extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "addressbook";
 
     protected static String TABLE_NAME = "table";
-    protected static final String ID_FIELD_NAME = "id";
     protected static String[][] FIELDS;
+    protected static String TABLE_ADDONS = "";
+    protected static final String ID_FIELD_NAME = "id";
 
     public AbstractRepository(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
     
-    public String getTableName() {
-        return TABLE_NAME;
-    }
-
     @Override
     public void onCreate(SQLiteDatabase db) {
 
+        String TABLE_FIELDS_DEF = "";
+
+        for(int i = 0; i < FIELDS.length; i++) {
+            TABLE_FIELDS_DEF += FIELDS[i][0] + " " + FIELDS[i][1];
+            TABLE_FIELDS_DEF += i < FIELDS.length - 1 ? "," : "";
+        }
+
+        TABLE_FIELDS_DEF += TABLE_ADDONS.length() > 0 ? "," + TABLE_ADDONS : "";
+        
+        String TABLE_CREATE_QUERY = "CREATE TABLE " + getTableName() + "(" + TABLE_FIELDS_DEF + ")";
+        db.execSQL(TABLE_CREATE_QUERY);
     }
     
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(db);
+    }
+
+    public String getTableName() {
+        return TABLE_NAME;
     }
     
     private String[] getFieldNames() {

@@ -12,7 +12,7 @@ public class MainActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-
+        
         Contact c;
         ContactRepository cr;
         
@@ -29,6 +29,11 @@ public class MainActivity extends Activity {
         c = new Contact();
         c.setName("Czesław Olak");
         c.setPhoneNumber("+48555333222");
+        cr.add(c);
+
+        c = new Contact();
+        c.setName("Marian Woronin");
+        c.setPhoneNumber("+48111222333");
         cr.add(c);
 
         c = new Contact();
