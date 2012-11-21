@@ -12,7 +12,7 @@ public class Contact extends Entity {
     public String getName() {
         return this.name;
     }
-    
+
     public void setPhoneNumber(String value) {
         this.phone_number = value;
     }

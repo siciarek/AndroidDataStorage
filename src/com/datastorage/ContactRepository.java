@@ -4,7 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 
-public class ContactRepository extends AbstractRepository {
+public class ContactRepository extends EntityRepository {
 
     protected static final String NAME = "name";
     protected static final String PHONE_NUMBER = "phone_number";
